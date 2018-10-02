@@ -1,3 +1,15 @@
+# Установка Ubuntu 18.04 в Google Cloud
+
+Как установить - по инструкции отсюда: https://cloud.google.com/compute/docs/quickstart-linux
+
+Внимание! В инструкции установка Debian, а нам нужна Ubuntu 18.04. Эта опция выбирается в меню Boot Disk
+
+![выбор ОС](https://habrastorage.org/webt/vl/dt/3m/vldt3mgct8jq3n6n9oa3pmyug_a.png "boot disk")
+
+После установики ваш инстанс можно будет найти на этой странице https://console.cloud.google.com/compute/instances
+
+![страница с инстансами](https://habrastorage.org/webt/cb/fx/qz/cbfxqzxqcdo0atxs9eg_c-t3jby.png "Google cloud instances")
+
 # Подготовка машины к работе
 
 ## Описание рабочей среды
@@ -12,18 +24,17 @@
 sudo apt-get update && sudo apt-get -y upgrade
 </pre>
 
-Эта команда обновит пакетный менеджер apt-get. После этого установить пакет pip:
+Эта команда обновит пакетный менеджер apt-get. После этого установить менеджер пакетов pip и вспомогательные утилиты (unzip, git):
 
 <pre>
-sudo apt install python-pip; sudo apt-get install unzip
+sudo apt-get install python-pip unzip git
 </pre>
 
 Пакет pip - это менеджер пакетов python, его помощью можно будет устанавливать python библиотеки. Утилита unzip - программа для распаковки архивов.
 
 С помощью pip установим библиотеку requests:
 <pre>
-pip install requests;
-pip install tqdm;
+pip install requests tqdm;
 </pre>
 
 Теперь zip-архив с данными, который я заранее залил на Google Drive нужно перенести на локальную машину. Для этого  склонируем полезный репозиторий (содержит утилиту для скачивания с Google Cloud).
@@ -60,7 +71,7 @@ git clone https://github.com/Dju999/data_analytics.git
 Примечание: т.к. мы распаковываем в директорию /tmp, то файлы будут удаляться при каждом рестарте машины, на которой развернут Docker. Нужно будет повторно распаковывать архив с помощью этой команды после каждого рестарта.
 
 <pre>
-rm -rf /tmp/data; unzip data.zip -d  /tmp/data
+sudo rm -rf /tmp/data; sudo unzip data.zip -d  /tmp/data
 </pre>
 
 Мы увидим процесс извлечения данных - это csv и json файлы
@@ -116,7 +127,7 @@ bash /home/load_data.sh
 
 Подключение к Postgres
 <pre>
-psql --host $APP_POSTGRES_HOST -U postgres -с "SELECT COUNT(*) as num_ratings FROM ratings"
+psql --host $APP_POSTGRES_HOST -U postgres -c "SELECT COUNT(*) as num_ratings FROM ratings"
 </pre>
 
 ## Решение проблем с docker

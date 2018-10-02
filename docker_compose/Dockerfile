@@ -6,7 +6,13 @@ FROM continuumio/miniconda3
 
 ENTRYPOINT ["/bin/bash"]
 
-RUN apt-get update && apt-get install -y  postgresql-client curl nano mongodb mongo-tools
+# для корректной версии psql
+RUN apt-get update &&  apt-get -y install sudo gnupg2
+
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+RUN apt-get update && apt-get install -y  postgresql-client-10 curl nano mongodb mongo-tools
 
 # Добавляем пакеты в анаконду - например, pandas
 RUN conda install -c anaconda scipy numpy pandas sqlalchemy pymongo psycopg2 msgpack-numpy lz4 msgpack-python
