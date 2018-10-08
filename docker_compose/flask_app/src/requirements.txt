@@ -1,0 +1,12 @@
+nomkl
+flask
+redis-py
+psycopg2
+pymongo==3.7.1
+numpy==1.13.1
+scipy==0.19.1
+lz4==0.10.1
+msgpack-numpy==0.4.1
+msgpack-python==0.4.8
+sqlalchemy==1.2.12
+pandas==0.22
