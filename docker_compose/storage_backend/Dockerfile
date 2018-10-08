@@ -14,8 +14,8 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo 
 
 RUN apt-get update && apt-get install -y  postgresql-client-10 curl nano mongodb mongo-tools
 
-# Добавляем пакеты в анаконду - например, pandas
-RUN conda install -c anaconda scipy numpy pandas sqlalchemy pymongo psycopg2 msgpack-numpy lz4 msgpack-python
-
 # Копируем в контейнер скрипт для создания таблиц
-COPY ./src/* /home/
+COPY src /home/
+
+# Добавляем пакеты в анаконду - например, pandas
+RUN while read requirement; do conda install --yes $requirement; done < /home/requirements.txt
