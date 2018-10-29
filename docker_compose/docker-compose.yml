@@ -13,8 +13,7 @@ services:
     restart: always
     ports: ["6380:6379"]
   data-client:
-    build:
-      context: ./storage_backend
+    image: netologyds/data-client
     depends_on:
       - mongo_host
       - postgres_host
@@ -27,12 +26,13 @@ services:
       - APP_POSTGRES_PORT=5432
       - APP_REDIS_HOST=redis_host
       - APP_REDIS_PORT=6379
+      - PGHOST=postgres_host
+      - PGUSER=postgres
     volumes:
       - /tmp/data:/data
     links: [mongo_host, postgres_host, redis_host]
   flask-app:
-    build:
-      context: ./flask_app
+    image: netologyds/flask_app
     depends_on:
       - mongo_host
       - postgres_host
