@@ -415,7 +415,7 @@ psql -c "\\copy ratings FROM '/data/ratings.csv' DELIMITER ',' CSV HEADER"
 Выгрузку данных можно производить с помощью команды copy
 
 <pre>
-\copy (SELECT * FROM ratings LIMIT 100) TO 'ratings_file.csv' WITH CSV HEADER DELIMETER as ',';
+\copy (SELECT * FROM ratings LIMIT 100) TO 'ratings_file.csv' WITH CSV HEADER DELIMITER as ',';
 </pre>
 
 ETL процессы позволяют использовать Postgres (или другие БД) как средство вычисления: получаем данные, обрабатываем внутри Postgres используя мощный движок вычислений и выгружаем результат для дальнейшего использования - например, в алгоритмах машинного обучения.
