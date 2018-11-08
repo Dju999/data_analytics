@@ -47,7 +47,7 @@ psql --host $APP_POSTGRES_HOST -U postgres
 
 Проверьте, что в таблице есть записи
 <pre>
-postgres=# SELECT  COUNT(*) FROM keywords;
+SELECT  COUNT(*) FROM keywords;
 </pre>
 
 Результат запроса
