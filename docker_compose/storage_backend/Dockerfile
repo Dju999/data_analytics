@@ -2,7 +2,7 @@
 # sudo docker-compose --project-name data-cli -f docker-compose.yml up --build -d
 # sudo docker-compose --project-name data-cli -f docker-compose.yml run --rm data-client
 
-FROM continuumio/miniconda3
+FROM continuumio/miniconda3:4.5.11
 
 ENTRYPOINT ["/bin/bash"]
 

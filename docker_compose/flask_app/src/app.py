@@ -5,10 +5,6 @@ from flask import Flask, render_template, request
 from db_interactions import PostgresStorage, MongoStorage, RedisStorage
 from recsys_model import SVDRecsys
 
-# если сначала работало, а потом поломалось - можно удалить контейнеры
-# sudo docker rm $(sudo docker ps -a -q)
-# sudo docker rmi $(sudo docker images -a -q)
-# docker volume prune -f
 
 # загружаем данные в Postgres
 postgres_storage = PostgresStorage()

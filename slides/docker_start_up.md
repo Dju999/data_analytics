@@ -1,15 +1,3 @@
-# Установка Ubuntu 18.04 в Google Cloud
-
-Как установить - по инструкции отсюда: https://cloud.google.com/compute/docs/quickstart-linux
-
-Внимание! В инструкции установка Debian, а нам нужна Ubuntu 18.04. Эта опция выбирается в меню Boot Disk
-
-![выбор ОС](https://habrastorage.org/webt/vl/dt/3m/vldt3mgct8jq3n6n9oa3pmyug_a.png "boot disk")
-
-После установики ваш инстанс можно будет найти на этой странице https://console.cloud.google.com/compute/instances
-
-![страница с инстансами](https://habrastorage.org/webt/cb/fx/qz/cbfxqzxqcdo0atxs9eg_c-t3jby.png "Google cloud instances")
-
 # Подготовка машины к работе
 
 ## Описание рабочей среды
@@ -43,7 +31,7 @@ pip install requests tqdm;
 rm -rf download_google_drive; git clone https://github.com/chentinghao/download_google_drive.git
 </pre>
 
-Запускаем скачивание файла - zip архива с данными. АРхив весит примерно 23Mb
+Запускаем скачивание файла - zip архива с данными. Архив весит примерно 23Mb
 <pre>
 python download_google_drive/download_gdrive.py 1D3CcWOSw-MUx6YvJ_4dqOLHZAh-6uTxK data.zip
 </pre>
@@ -68,11 +56,16 @@ git clone https://github.com/Dju999/data_analytics.git
 
 Сначала распаковываем архив с данными.
 
-Примечание: т.к. мы распаковываем в директорию /tmp, то файлы будут удаляться при каждом рестарте машины, на которой развернут Docker. Нужно будет повторно распаковывать архив с помощью этой команды после каждого рестарта.
+Создаём в системе рабочую директорию, в которой буду храниться файлы для закачки в БД
 
 <pre>
-sudo rm -rf /tmp/data; sudo unzip data.zip -d  /tmp/data
-</pre>
+export NETOLOGY_DATA="/usr/local/share/netology_data"; \
+sudo rm -rf "$NETOLOGY_DATA"/*; \
+sudo mkdir -m 764 "$NETOLOGY_DATA"; \
+mkdir "$NETOLOGY_DATA"/raw_data; \
+unzip data.zip -d "$NETOLOGY_DATA"/raw_data; \
+mkdir "$NETOLOGY_DATA"/pg_data;
+<pre>
 
 Мы увидим процесс извлечения данных - это csv и json файлы
 
@@ -92,20 +85,14 @@ Archive:  data.zip
 cd data_analytics/docker_compose
 </pre>
 
-Запускаем построение контейнера. Внимание! Построение контейнера запускаем только один раз, при самом первом запуске инстанса.
-
+Экспортируем переменную среды - это директория, куда будем извлекать данные
 <pre>
-sudo docker-compose --project-name data-cli -f docker-compose.yml up --build -d
+export NETOLOGY_DATA="/usr/local/share/netology_data"
 </pre>
 
-В консоли побежит информация о сборке контейнера. Для теста запустим контейнер и подключимся к командной строке Alpine-Linux:
+Запускаем сборку контейнера. В консоли побежит информация о сборке контейнера. После окончания сборки мы автоматически подключимся к командной строке Debian, т.е. внутрь контейнера:
 <pre>
-sudo docker-compose --project-name data-cli -f docker-compose.yml run --rm data-client
-</pre>
-
-Проверим, что консоль работает правильно
-<pre>
-echo "Hello, world!"
+make client
 </pre>
 
 Проверим, что директория с данными успешно подключилась:
@@ -149,6 +136,11 @@ sudo docker stop $(sudo docker ps -a -q)
 sudo docker rm $(sudo docker ps -a -q)
 </pre>
 
+Удаление всех образов
+<pre>
+docker rmi $(docker images -q)
+</pre>
+
 Параметры docker run, остальные параметры [тут](https://docs.docker.com/v1.11/engine/reference/commandline/run/)
 
 <code>
@@ -161,3 +153,14 @@ sudo docker rm $(sudo docker ps -a -q)
 -it - запустить интеракцивный терминал
 </pre>
 
+# Установка Ubuntu 18.04 в Google Cloud
+
+Как установить - по инструкции отсюда: https://cloud.google.com/compute/docs/quickstart-linux
+
+Внимание! В инструкции установка Debian, а нам нужна Ubuntu 18.04. Эта опция выбирается в меню Boot Disk
+
+![выбор ОС](https://habrastorage.org/webt/vl/dt/3m/vldt3mgct8jq3n6n9oa3pmyug_a.png "boot disk")
+
+После установики ваш инстанс можно будет найти на этой странице https://console.cloud.google.com/compute/instances
+
+![страница с инстансами](https://habrastorage.org/webt/cb/fx/qz/cbfxqzxqcdo0atxs9eg_c-t3jby.png "Google cloud instances")
