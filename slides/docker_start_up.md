@@ -38,10 +38,12 @@ python download_google_drive/download_gdrive.py 1D3CcWOSw-MUx6YvJ_4dqOLHZAh-6uTx
 
 ## Установка docker
 
-Установим docker и docker-compose
+Установим docker, согласно [Инструкции тут](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+
+Кроме докера поставим docker-compose
 
 <pre>
-sudo apt-get install docker docker-compose
+sudo apt-get install docker-compose
 </pre>
 
 Теперь скачиваем репозиторий курса
@@ -65,7 +67,7 @@ sudo mkdir -m 764 "$NETOLOGY_DATA"; \
 mkdir "$NETOLOGY_DATA"/raw_data; \
 unzip data.zip -d "$NETOLOGY_DATA"/raw_data; \
 mkdir "$NETOLOGY_DATA"/pg_data;
-<pre>
+</pre>
 
 Мы увидим процесс извлечения данных - это csv и json файлы
 
