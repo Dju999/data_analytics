@@ -204,7 +204,7 @@ if session.query(UITriplet).count() == 0:
 Результат работы скрипта psycopg_example.py:
 
 <pre>
-python /home/psycopg_example.py; python /home/sqlalchemy_example.py
+psql --host $APP_POSTGRES_HOST -U postgres -c "DROP TABLE IF EXISTS ui_interactions"; python /home/psycopg_example.py; python /home/sqlalchemy_example.py
 
 2018-08-05 20:06:35,051 : INFO : Создаём подключёние к Postgres
 2018-08-05 20:06:35,118 : INFO : Данные по оценкам загружены из Postgres
