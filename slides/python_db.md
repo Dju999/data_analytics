@@ -128,7 +128,7 @@ from sqlalchemy.orm import mapper
 from sqlalchemy.orm import sessionmaker
 
 engine = create_engine('postgresql://postgres:@{}'.format(os.environ['APP_POSTGRES_HOST']))
-</pre
+</pre>
 
 Теперь можно описать таблицу в виде класса python и создать её средствами SQLAlchemy
 
