@@ -64,9 +64,9 @@ git clone https://github.com/Dju999/data_analytics.git
 export NETOLOGY_DATA="/usr/local/share/netology_data"; \
 sudo rm -rf "$NETOLOGY_DATA"/*; \
 sudo mkdir -m 764 "$NETOLOGY_DATA"; \
-mkdir "$NETOLOGY_DATA"/raw_data; \
+sudo mkdir -m 764 "$NETOLOGY_DATA"/raw_data; \
 unzip data.zip -d "$NETOLOGY_DATA"/raw_data; \
-mkdir "$NETOLOGY_DATA"/pg_data;
+sudo mkdir -m 764 "$NETOLOGY_DATA"/pg_data;
 </pre>
 
 Мы увидим процесс извлечения данных - это csv и json файлы
