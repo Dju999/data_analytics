@@ -301,7 +301,7 @@ collection = db['tags']
 <pre>
 agg_filename = '/data/keywords.tsv'
 tag_data = []
-if db.tags.count() > 0:
+if db.tags.count() == 0:
     with open(agg_filename, 'r') as f:
         for line in f.readlines():
             movieId, tags = line.strip().split('\t')
