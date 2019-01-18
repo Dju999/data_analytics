@@ -30,7 +30,8 @@ services:
         aliases:
           - redis_host
   data-client:
-    image: netologyds/data-client
+    build:
+      context: ./storage_backend
     depends_on:
       - mongo_host
       - postgres_host
@@ -49,6 +50,9 @@ services:
     networks:
       - netology_network
     container_name: data-client
+    ports:
+        - "8889:8888"
+
   flask-app:
     build:
       context: ./flask_app
@@ -74,5 +78,9 @@ services:
 networks:
   netology_network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/24
+          gateway: 172.19.0.1
     driver_opts:
       com.docker.network.driver.mtu: 1400

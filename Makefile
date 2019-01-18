@@ -7,7 +7,7 @@ build:
 	$(DOCKER_COMPOSE) build $(PROJECT_NAME)
 
 build_flask:
-	$(DOCKER_COMPOSE_FLASK) build  $(PROJECT_FLASK_NAME)
+	$(DOCKER_COMPOSE_FLASK) build $(PROJECT_FLASK_NAME)
 
 # Принудительно пересобрать контейнер
 rebuild:
