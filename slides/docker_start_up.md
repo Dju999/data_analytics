@@ -56,7 +56,7 @@ source ~/.bashrc
 cd $NETOLOGY_DATA
 
 mkdir raw_data; mkdir pg_data; mkdir $NETOLOGY_DATA/data
-<pre>
+</pre>
 
 ## Загрузка дампа БД  и csv данных
 
