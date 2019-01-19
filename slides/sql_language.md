@@ -1,24 +1,9 @@
 # Командная строка PostgreSQL
 
-## Старт контейнера
-
-Чтобы получить доступ к бэкенду (postgres серверу и postgres-клиенту) нужно запустить сборку контейнера.
-Сборка производиться один разследующей командой:
-
-<pre>
-docker-compose --project-name data-cli -f docker-compose.yml up --build -d
-</pre>
-
-После сборки контейнера нам нужно попасть в командную строку гостевой ОС внутри контейнера:
-
-<code>
-docker-compose --project-name data-cli -f docker-compose.yml run --rm data-client
-</code>дующей командой:
-
 Для доступа к Postgres мы будем использовать утилиту командной строки psql. Запустим интерактивную сессию сле
 
 <pre>
-psql --host $APP_POSTGRES_HOST -U postgres
+psql -U postgres
 </pre>
 
 Если всё прошло успешно, мы увидим приглашение интерактивной сессии Postgres клиента:
