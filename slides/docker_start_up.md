@@ -62,6 +62,8 @@ mkdir raw_data; mkdir pg_data; mkdir $NETOLOGY_DATA/data
 
 Теперь данные, которые я заранее залил на Google Drive нужно перенести на локальную машину. Для этого  склонируем полезный репозиторий (содержит утилиту для скачивания с Google Cloud).
 
+Мы используем данные [The Movies Dataset](https://www.kaggle.com/rounakbanik/the-movies-dataset) c Kaggle.
+
 <pre>
 rm -rf download_google_drive; git clone https://github.com/chentinghao/download_google_drive.git
 </pre>
