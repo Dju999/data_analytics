@@ -51,11 +51,20 @@ source ~/.bashrc
 
 Чтобы проверить, как применились изменения выполним в консоли команду **echo $NETOLOGY_DATA** - должны увидеть в результат **/usr/local/share/netology_data**.
 
+Создадим директорию
+<pre>
+sudo mkdir $NETOLOGY_DATA;
+</pre>
+и дадим нужные права
+<pre>
+sudo chmod 777 $NETOLOGY_DATA;
+</pre>
+
 Перейдём в созданную директорию и создадим вспомогательные:
 <pre>
 cd $NETOLOGY_DATA
 
-mkdir raw_data; mkdir pg_data; mkdir $NETOLOGY_DATA/data
+mkdir $NETOLOGY_DATA/raw_data; mkdir $NETOLOGY_DATA/pg_data mkdir $NETOLOGY_DATA/data
 </pre>
 
 ## Загрузка дампа БД  и csv данных
