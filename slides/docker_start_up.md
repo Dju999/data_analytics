@@ -112,6 +112,28 @@ git clone https://github.com/Dju999/data_analytics.git
 </pre>
 
 
+### Установка Postgres
+
+Теперь в Ubuntu нужно установить Postgres. Сначала добавим нужные репозитории
+<pre>
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -;
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
+</pre>
+
+Проведём установку с помощью стандартного менеджера пакетов apt-get
+<pre>
+sudo apt update
+sudo apt-get install postgresql-10
+</pre>
+
+После установки рестартуем демона базы данных
+<pre>
+sudo systemctl stop postgresql.service
+sudo systemctl start postgresql.service
+sudo systemctl enable postgresql.service
+sudo systemctl status postgresql.service
+</pre>
+
 Теперь нужно загрузить дамп в Postgres. Для этого перейдем в консоль Postgres
 <pre>
 sudo su -l postgres
