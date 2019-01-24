@@ -44,7 +44,7 @@ export APP_REDIS_PORT=6379
 export NETOLOGY_DATA="/usr/local/share/netology"
 </pre>
 
-После этого закроем файл с помощью комбинации **ctrl + X**, затем **ctrl + C** и выполним в терминале команду source, чтобы применить изменения:
+После этого закроем файл с помощью комбинации **ctrl + O**, нажать Enter, затем **ctrl + X**, подтвердить **Y**, затем **ctrl + X** и выполним в терминале команду source, чтобы применить изменения:
 <pre>
 source ~/.bashrc
 </pre>
@@ -82,32 +82,6 @@ rm -rf download_google_drive; git clone https://github.com/chentinghao/download_
 python download_google_drive/download_gdrive.py 1uWZjmm9vwxZMplMqUtn0r-M16a0ochQa $NETOLOGY_DATA/data/all_tables.dump
 </pre>
 
-Теперь нужно загрузить дамп в Postgres. Для этого перейдем в консоль Postgres
-<pre>
-sudo su -l postgres
-</pre>
-
-Мы переключимся в сеанс пользователя Postgres. Экспортируем переменную среды для доступа к данным
-<pre>
-NETOLOGY_DATA="/usr/local/share/netology"
-</pre>
-
-Осталось загрузить текстовый дамп в Постгрю
-<pre>
-psql -d postgres -U postgres -1 -f $NETOLOGY_DATA/data/all_tables.dump
-</pre>
-
-Подключимся к БД и проверим, что данные загружены
-<pre>
-postgres@adzhumurat-HP-G5:~$ psql -U postgres -c "SELECT COUNT(*) FROM ratings;"
- count
---------
- 777776
-(1 row)
-</pre>
-
-Готово! Видео-тутуориал по установке и настройке среды [доступен по ссылке](https://www.youtube.com/watch?v=Qlfw-oH4QiI)
-
 Теперь скачаем текстовые данные в формате csv, которые могут пригодиться для загрузки в Python в следующих частях курса. Запускаем скачивание файла - zip архива с данными. Архив весит примерно 23Mb
 <pre>
 python download_google_drive/download_gdrive.py 1D3CcWOSw-MUx6YvJ_4dqOLHZAh-6uTxK data.zip
@@ -137,6 +111,36 @@ Archive:  data.zip
 git clone https://github.com/Dju999/data_analytics.git
 </pre>
 
+
+Теперь нужно загрузить дамп в Postgres. Для этого перейдем в консоль Postgres
+<pre>
+sudo su -l postgres
+</pre>
+
+Мы переключимся в сеанс пользователя Postgres. Экспортируем переменную среды для доступа к данным
+<pre>
+NETOLOGY_DATA="/usr/local/share/netology"
+</pre>
+
+Осталось загрузить текстовый дамп в Постгрю
+<pre>
+psql -d postgres -U postgres -1 -f $NETOLOGY_DATA/data/all_tables.dump
+</pre>
+
+Подключимся к БД и проверим, что данные загружены
+<pre>
+psql -U postgres -c "SELECT COUNT(*) FROM ratings;"
+</pre>
+
+Результат
+<pre>
+ count
+--------
+ 777776
+(1 row)
+</pre>
+
+Готово! Видео-туториал по установке и настройке среды [доступен по ссылке](https://www.youtube.com/watch?v=Qlfw-oH4QiI)
 
 ## Установка docker
 
