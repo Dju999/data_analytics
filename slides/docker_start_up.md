@@ -64,7 +64,7 @@ sudo chmod 777 $NETOLOGY_DATA;
 <pre>
 cd $NETOLOGY_DATA
 
-mkdir $NETOLOGY_DATA/raw_data; mkdir $NETOLOGY_DATA/pg_data mkdir $NETOLOGY_DATA/data
+mkdir $NETOLOGY_DATA/raw_data; mkdir $NETOLOGY_DATA/pg_data; mkdir $NETOLOGY_DATA/data
 </pre>
 
 ## Загрузка дампа БД  и csv данных
