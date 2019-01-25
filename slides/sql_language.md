@@ -18,7 +18,7 @@ postgres=#
 Проверим, что в БД есть какие-то таблицы
 
 <code>
-SELEC
+SELECT
     table_schema,
     table_name
 FROM information_schema.tables
@@ -86,7 +86,7 @@ postgres=#
 Вопрос: почему ошибка?
 
 <pre>
-NSERT INTO
+INSERT INTO
     account_temp
 VALUES
     (1235, 'ololo@ya.ru', '2023-2-1'::timestamp),
@@ -107,13 +107,13 @@ ALTER TABLE account_temp ADD COLUMN phone VARCHAR;
 
 Заполнить колонку рандомными значениями
 <pre>
-UPDATE account SET phone=md5(random()::text);
+UPDATE account_temp SET phone=md5(random()::text);
 </pre>
 
 ПРоизведём выборку данных
 
 <pre>
-SELECT * FROM account;
+SELECT * FROM account_temp;
 </pre>
 
 Результат
