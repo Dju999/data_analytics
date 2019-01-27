@@ -7,7 +7,7 @@
 - id (число) соответствует film_id в табличке persons2content
 - country страна (тест)
 - box_office сборы в долларах (число)
-- release_year год выпуска (timestamp)
+- release_date дата выпуска (date)
 
 Табличка persons
 - id (число) - соответствует person_id в табличке persons2content

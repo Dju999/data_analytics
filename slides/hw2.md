@@ -23,7 +23,7 @@
 
 Выполненное домашнее задание - это файл формата .sql. Создать такой файл можно в любом текстовом редакторе - под Виндой советую Motepad++, под Linux Sublime.
 Идеальный вариант - установить среду разработки Pycharm и все файлы открывать и редактировать в ней.
-Шаблон файла можно найти в директории storage_backend/src/hw1.sql, внутри контейнера фал находится в директории /home.
+Шаблон файла можно найти в директории storage_backend/src/hw1.sql
 
 Вот пример файл, который я создал hw1.sql
 <pre>
@@ -41,15 +41,9 @@ SELECT userId, COUNT(*) FROM ratings GROUP BY 1 ORDER BY 2 DESC LIMIT 10;
 
 Все 4 запроса домашки нужно оформить в этом файле.
 
-Ппотом пересобрать контейнер (потому что файл поменялся), запустить контейнер.
-<pre>
-sudo docker-compose --project-name data-cli -f docker-compose.yml up --build -d
-sudo docker-compose --project-name data-cli -f docker-compose.yml run --rm data-client
-</pre>
-
 Теперь можно запустить .sql файл с домашней работой с помощью psql
 <pre>
-psql --host $APP_POSTGRES_HOST -U postgres -f /home/hw1.sql
+psql -U postgres -f hw1.sql
 </pre>
 
 Результат работы скрипта
@@ -83,4 +77,4 @@ psql --host $APP_POSTGRES_HOST -U postgres -f /home/hw1.sql
 (10 rows)
 </pre>
 
-В качестве ответа нужно прислать файл hw1.sql (можно ссылку на github) и скриншот с экраном, где исполняются запросы.
+В качестве ответа нужно прислать файл hw1.sql (лучше ссылку на github) и скриншот с экраном, где исполняются запросы.
