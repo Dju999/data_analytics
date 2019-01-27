@@ -25,7 +25,8 @@ sudo apt-get install python-pip unzip git
 
 С помощью pip установим библиотеки **requests** и **tqdm**:
 <pre>
-pip install requests tqdm;
+pip install requests;
+pip install tqdm;
 </pre>
 
 Далее нужно отредактировать файл ~/.bashrc и установить там переменные среды. Для этого откроем файл с помощью редактора nano:
@@ -51,20 +52,43 @@ source ~/.bashrc
 
 Чтобы проверить, как применились изменения выполним в консоли команду **echo $NETOLOGY_DATA** - должны увидеть в результат **/usr/local/share/netology_data**.
 
+**Справка** команда *echo* "печатает" значение переменной среды *$NETOLOGY_DATA*, где значок *$* является служебным.
+
 Создадим директорию
 <pre>
 sudo mkdir $NETOLOGY_DATA;
 </pre>
+
+**Справка** для работы в консоли будем использовать базовые команды Linux
+
+* Команда *sudo* позволяет запустить другие команды с правами Администратора системы
+* Команда *mkdir* создаёт пустую директорию
+* Команда *ls* печатает список файлов, которые находятся в директории.
+* Команда *chmod 777* разрешает зоздание и удаление файлов из директории */usr/local/share/netology* всем пользователям без исключения
+* Команда *cd* позволяет сменить директорию.
+
 и дадим нужные права
 <pre>
 sudo chmod 777 $NETOLOGY_DATA;
 </pre>
+
 
 Перейдём в созданную директорию и создадим вспомогательные:
 <pre>
 cd $NETOLOGY_DATA
 
 mkdir $NETOLOGY_DATA/raw_data; mkdir $NETOLOGY_DATA/pg_data; mkdir $NETOLOGY_DATA/data
+</pre>
+
+Проверим, что все директории созданы успешно
+
+<pre>
+ls $NETOLOGY_DATA
+</pre>
+
+Результат работы команды
+<pre>
+raw_data, pg_data, data
 </pre>
 
 ## Загрузка дампа БД  и csv данных
