@@ -450,12 +450,12 @@ db.posts.find({author: ObjectId("5b571bf081d67789509607f1")}, {day: 1, _id: 0}).
 Для загрузки JSON выполним скрипт формирования JSON - это будут случайные картинки собачек, получаемых по API
 
 <pre>
-rm -f /data/test.json; for i in $(seq 100 $END); do curl "https://dog.ceo/api/breeds/image/random">>/data/test.json>>/data/test.json; done;
+rm -f test.json; for i in $(seq 100 $END); do curl "https://dog.ceo/api/breeds/image/random">>test.json; done;
 </pre>
 
 На выходе получаем JSON-файл
 <pre>
-head /data/test.json;
+head test.json;
 </pre>
 
 Результат
@@ -469,39 +469,12 @@ head /data/test.json;
 / #
 </pre>
 
-Этот файл можно достать из контейнера для дальнейших экспериментов
-<pre>
-sudo docker ps
-</pre>
-
-Результат
-
-<pre>
-CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS              PORTS                      NAMES
-78a72285499e        mongoclient_alpine-client   "/bin/sh"                About an hour ago   Up About an hour                               mongoclient_alpine-client_run_1
-</pre>
-
-Копируем файл из контейнера
-<pre>
-sudo docker cp 78a72285499e:/data/test.json /home/adzhumurat/test.json
-</pre>
-
-Проверяем, что файл выгружен в локальную ФС.
-
-<pre>
-ls /home/adzhumurat/test.json
-</pre>
-
-Результат
-
-<pre>
-/home/adzhumurat/test.json
-</pre>
+**ВНИМАНИЕ** Генерировать файл не надо, он уже есть в исходном наборе
 
 Загрузим файл в Mongo с помощью утилиты mongoimport:
 
 <pre>
-/usr/bin/mongoimport --host $APP_MONGO_HOST --port $APP_MONGO_PORT --db pets --collection dogs --file /data/test.json
+/usr/bin/mongoimport --db pets --collection dogs --file $NETOLOGY_DATA/raw_data/test.json
 </pre>
 
 Проверим, что документы успешно загружены
@@ -556,7 +529,7 @@ db.dogs.find().limit(3)
 Применим к нашей игрушечной таблице
 
 <pre>
-/usr/bin/mongo $APP_MONGO_HOST:$APP_MONGO_PORT/pets
+/usr/bin/mongo localhost:27017/pets
 db.dogs.aggregate([{$group: {_id: "$status"}}])
 </pre>
 
