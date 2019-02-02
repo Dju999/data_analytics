@@ -188,6 +188,103 @@ psql -U postgres -c "SELECT COUNT(*) FROM ratings;"
 
 Готово! Видео-туториал по установке и настройке среды [доступен по ссылке](https://www.youtube.com/watch?v=Qlfw-oH4QiI)
 
+## Установка Mongo
+
+Выполним установку Mongo [по инструкции](https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-18-04). Для установки воспользуемся пакетным менеджером
+<pre>
+sudo apt install -y mongodb
+</pre>
+
+После окончания установки проверим
+<pre>
+sudo systemctl status mongodb
+</pre>
+Результат работы команды
+<pre>
+● mongodb.service - An object/document-oriented database
+   Loaded: loaded (/lib/systemd/system/mongodb.service; enabled; vendor preset: 
+   Active: active (running) since Sat 2019-02-02 13:53:07 MSK; 3min 2s ago
+     Docs: man:mongod(1)
+ Main PID: 3853 (mongod)
+    Tasks: 23 (limit: 4915)
+   CGroup: /system.slice/mongodb.service
+           └─3853 /usr/bin/mongod --unixSocketPrefix=/run/mongodb --config /etc/
+
+фев 02 13:53:07 netology-VirtualBox systemd[1]: Started An object/document-orien
+~
+</pre>
+
+**Внимание**: чтобы вернуться в консоль, наберите
+<pre>
+q
+</pre>
+
+Подключимся к CLI MomgoDB
+<pre>
+/usr/bin/mongo
+</pre>
+
+Результат
+<pre>
+netology@netology-VirtualBox:~$ /usr/bin/mongo
+MongoDB shell version v3.6.3
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.6.3
+</pre>
+
+Чтобы выйти из консоли Mongo, наберите
+<pre>
+quit()
+</pre>
+
+Проверим, что доступны данные для загрузки
+<pre>
+ls $NETOLOGY_DATA/raw_data | grep test.json
+</pre>
+
+Выхлоп команды
+<pre>
+test.json
+</pre>
+
+Воспользуемся утилитой Mongoimport для загрузки данных
+<pre>
+/usr/bin/mongoimport --db pets --collection dogs --file $NETOLOGY_DATA/raw_data/test.json
+</pre>
+
+Результат работы команды
+<pre>
+2019-02-02T15:00:54.383+0300	connected to: localhost
+2019-02-02T15:00:54.439+0300	imported 100 documents
+</pre>
+
+Проверим, что всё ок. Запустим Mongo
+<pre>
+mongo
+</pre>
+
+переключимся в созданную схему данных
+<pre>
+use pets;
+</pre>
+
+Результат
+<pre>
+switched to db pets
+</pre>
+
+Проверим, что json загрузился
+<pre>
+db.dogs.count()
+</pre>
+
+Результат
+<pre>
+100
+</pre>
+
+Всё готово! С MongoDB можно начинать работать.
+
 ## Установка docker
 
 Установим docker, согласно [Инструкции тут](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
