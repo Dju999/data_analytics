@@ -3,7 +3,7 @@
 Подключение к Mongo-серверу осуществляется с помощью утилиты Mongo
 
 <pre>
-/usr/bin/mongo -host $APP_MONGO_HOST -port $APP_MONGO_PORT
+/usr/bin/mongo
 </pre>
 
 Результат
